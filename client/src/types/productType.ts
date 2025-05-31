@@ -5,6 +5,6 @@ export interface Product {
   description: String;
   category: String;
   releaseDate: String;
-  availability: Boolean;
+  availability: boolean;
   quantity: number;
 }
