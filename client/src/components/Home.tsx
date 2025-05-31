@@ -6,14 +6,11 @@ function Home(props: any): JSX.Element {
   return (
     <div className="h-screen pt-[5%]">
       <div className="grid grid-cols-3 gap-4 mx-[5%]">
-        {boxes.map((box: number, index: number) => {
-          return (
-            <div key={index} className="box-item p-4 bg-tertiary">
-              <img src="/vite.svg"></img>
-              ProductId: {box}
-            </div>
-          );
-        })}
+        {boxes.map((value: number, index: number): any => (
+          <div className="bg-tertiary p-7 rounded-xl" key={index}>
+            Product Id: {value}
+          </div>
+        ))}
       </div>
     </div>
   );
