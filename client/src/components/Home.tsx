@@ -1,6 +1,7 @@
 import { JSX, useEffect, useState } from "react";
 import { getAllProducts } from "@/api/productAPI";
 import { Product } from "@/types/productType";
+import { Link } from "react-router-dom";
 
 function Home(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,21 +24,26 @@ function Home(): JSX.Element {
   }, []);
 
   return loading ? (
-    <div className="h-screen pt-[5%]">
+    <div className="h-screen pt-[5%] bg-secondary">
       <h1 className="text-4xl mx-[5%]">Please wait content is still loading</h1>
     </div>
   ) : (
-    <div className="h-screen pt-[5%]">
+    <div className="h-screen pt-[5%] bg-secondary">
       <div className="grid grid-cols-3 gap-4 mx-[5%]">
         {products?.map((product: Product): any => (
-          <div className="bg-tertiary p-7 rounded-xl hover:bg-accent duration-100" key={product.id}>
-            <p className="id">Product Name : {product.name}</p>
-            <p>Price : {product.price}</p>
-            <p className="Avail">
-              Availability :{" "}
-              {product.availability ? product.quantity : "Out of Stock"}
-            </p>
-          </div>
+          <Link to={`/product/${product.id}`} key={product.id}>
+            <div
+              className="bg-tertiary p-7 rounded-xl hover:bg-accent duration-100"
+              key={product.id}
+            >
+              <p className="id text-2xl">Product Name : {product.name}</p>
+              <p>Price : {product.price}</p>
+              <p className="Avail">
+                Availability :{" "}
+                {product.availability ? product.quantity : "Out of Stock"}
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

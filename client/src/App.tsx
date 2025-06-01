@@ -1,13 +1,17 @@
 import NavigationBar from "./components/NavigationBar";
-import Home from "./components/Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import DescriptionPage from "./pages/DescriptionPage";
 
 function App() {
-
   return (
-    <div className="bg-secondary min-h-screen">
+    <BrowserRouter>
       <NavigationBar />
-      <Home />
-    </div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/product/:id" element={<DescriptionPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
