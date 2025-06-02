@@ -8,3 +8,13 @@ export interface Product {
   availability: boolean;
   quantity: number;
 }
+
+export interface inputProduct {
+  price: number;
+  name: string;
+  description: string;
+  category: string;
+  releaseDate: string;
+  availability: boolean;
+  quantity: number;
+}
