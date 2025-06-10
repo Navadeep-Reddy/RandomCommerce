@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { inputProduct } from "@/types/productType";
+import { uploadProducts } from "@/api/productAPI";
 
 export default function AddPage() {
+  const [image, setImage] = useState<File | null>(null);
   const [product, setProduct] = useState<inputProduct>({
     price: 0,
     name: "",
@@ -12,8 +14,13 @@ export default function AddPage() {
     quantity: 0,
   });
 
-  function handleClick() {
-    console.log(product);
+  async function handleClick() {
+    if (image && product) {
+      const response = await uploadProducts(product, image);
+      console.log(response);
+    } else {
+      console.log("Required data is not filled");
+    }
   }
 
   return (
@@ -148,6 +155,13 @@ export default function AddPage() {
               name="image"
               accept="image/*"
               className="w-full px-4 pt-6 pb-2 text-lg border rounded-md focus:outline-none focus:ring-2 focus:ring-primary file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:rounded-full file:text-primary hover:file:bg-blue-100"
+              onChange={(e) => {
+                if (e.target.files) {
+                  setImage(e.target.files[0]);
+                } else {
+                  setImage(null);
+                }
+              }}
             />
             <p className="absolute left-4 top-1 text-sm text-black pointer-events-none">
               Product Image
