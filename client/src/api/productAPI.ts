@@ -72,3 +72,26 @@ export async function uploadProducts(
     throw error; // Re-throw the error so the calling component can handle it
   }
 }
+
+export async function getImage(prodId: number): Promise<string | null> {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/product/image/${prodId}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Error in Fetching byte array");
+    }
+
+    const imageObject: Blob = await response.blob();
+
+    if (imageObject == null) {
+      throw new Error("Error in parsing data to Blob");
+    }
+
+    const url = URL.createObjectURL(imageObject);
+    return url;
+  } catch {
+    return null;
+  }
+}
