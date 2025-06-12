@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin(maxAge = 36000)
 public class ProductController {
 
     ProductService productService;
@@ -74,6 +74,16 @@ public class ProductController {
         }
         else{
             return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @DeleteMapping("product/delete/{prodId}")
+    public ResponseEntity<?> deleteProduct(@PathVariable int prodId){
+        if (productService.deleteProduct(prodId)){
+            return ResponseEntity.ok().build();
+        }
+        else{
+            return ResponseEntity.notFound().build();
         }
     }
 

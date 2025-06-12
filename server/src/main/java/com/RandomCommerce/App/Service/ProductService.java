@@ -48,4 +48,13 @@ public class ProductService {
 
         return repo.save(product);
     }
+
+    public boolean deleteProduct(int prodId) {
+        Product product = repo.findById(prodId).orElse(null);
+
+        if (product == null) return false;
+
+        repo.deleteById(prodId);
+        return true;
+    }
 }
