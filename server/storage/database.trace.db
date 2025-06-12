@@ -358,3 +358,9 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /home/navadeep/D
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 26 more
+2025-06-10 19:26:49.362998+05:30 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUCT" not found (this database is empty); SQL statement:
+select p1_0.id,p1_0.availability,p1_0.category,p1_0.description,p1_0.image_data,p1_0.image_name,p1_0.image_type,p1_0.name,p1_0.price,p1_0.quantity,p1_0.release_date from product p1_0 [42104-232]
+2025-06-10 19:26:49.380586+05:30 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUCT" not found (this database is empty); SQL statement:
+select p1_0.id,p1_0.availability,p1_0.category,p1_0.description,p1_0.image_data,p1_0.image_name,p1_0.image_type,p1_0.name,p1_0.price,p1_0.quantity,p1_0.release_date from product p1_0 [42104-232]

@@ -3,6 +3,7 @@ package com.RandomCommerce.App.Controller;
 import com.RandomCommerce.App.Models.Product;
 import com.RandomCommerce.App.Service.ProductService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,6 +52,29 @@ public class ProductController {
         }
 
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @GetMapping("/product/image/{prodId}")
+    public ResponseEntity<byte[]> getProductImage(@PathVariable int prodId){
+        Product product = productService.getProductById(prodId);
+
+        if (product == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(product.getImageData());
+
+    }
+
+    @PutMapping("/product/update/{prodId}")
+    public ResponseEntity<?> updateProduct(@PathVariable int prodId, @RequestPart Product product, @RequestPart MultipartFile file) throws IOException {
+        Product item = productService.updateProduct(prodId, product, file);
+
+        if (item != null){
+            return ResponseEntity.ok().body(item);
+        }
+        else{
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 
