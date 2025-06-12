@@ -1,5 +1,5 @@
 import { JSX, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getImage, getProductById } from "@/api/productAPI";
 import { Product } from "@/types/productType";
 
@@ -56,9 +56,23 @@ export default function Description(): JSX.Element {
               <h3 className="font-semibold">Quantity:</h3>
               <p className="">{product.quantity}</p>
             </div>
+            <div className="flex gap-x-6 mt-10">
+              <Link to={`/update/${product.id}`}>
+                <button className="border bg-primary px-5 py-2 text-white font-semibold border-none rounded-full">
+                  Update
+                </button>
+              </Link>
+              <button className="border bg-primary px-5 py-2 text-white font-semibold border-none rounded-full">
+                Delete
+              </button>
+            </div>
           </div>
           <div className="image">
-            {image ? <img src={image} className="h-[500px] w-[500px]"></img> : <div>Loading Image</div>}
+            {image ? (
+              <img src={image} className="h-[500px] w-[500px]"></img>
+            ) : (
+              <div>Loading Image</div>
+            )}
           </div>
         </div>
       ) : (

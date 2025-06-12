@@ -1,4 +1,5 @@
-import { inputProduct, Product } from "@/types/productType";
+import {  Product } from "@/types/productType";
+import { METHODS } from "http";
 
 export async function getAllProducts(): Promise<Product[] | null> {
   try {
@@ -33,7 +34,7 @@ export async function getProductById(prodId: string): Promise<Product | null> {
 }
 
 export async function uploadProducts(
-  product: inputProduct,
+  product: Product,
   image: File
 ): Promise<any> {
   const formData = new FormData();
@@ -92,6 +93,36 @@ export async function getImage(prodId: number): Promise<string | null> {
     const url = URL.createObjectURL(imageObject);
     return url;
   } catch {
+    return null;
+  }
+}
+
+export async function updateProduct(
+  prodId: number,
+  product: Product,
+  image: File
+): Promise<Product | null> {
+  let formData = new FormData();
+  formData.append(
+    "product",
+    new Blob([JSON.stringify(product)], { type: "application/json" })
+  );
+  formData.append("file", image);
+
+  try {
+    const response = await fetch(
+      `https://localhost:8080/api/product/update/${prodId}`,
+      { method: "POST", body: formData }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed during updating");
+    }
+
+    const data: Product = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
     return null;
   }
 }

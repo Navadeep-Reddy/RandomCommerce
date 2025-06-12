@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "@/types/productType";
-import { uploadProducts } from "@/api/productAPI";
+import { getImage, getProductById, updateProduct } from "@/api/productAPI";
+import { useParams } from "react-router-dom";
 
-export default function AddPage() {
+export default function UpdatePage() {
   const [image, setImage] = useState<File | null>(null);
+  const { id } = useParams();
   const [product, setProduct] = useState<Product>({
     id: 0,
     price: 0,
@@ -16,13 +18,28 @@ export default function AddPage() {
   });
 
   async function handleClick() {
-    if (image && product) {
-      const response = await uploadProducts(product, image);
+    if (image && product && id) {
+      const response = await updateProduct(parseInt(id), product, image);
       console.log(response);
     } else {
       console.log("Required data is not filled");
     }
   }
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        if (id) {
+          const response: Product | null = await getProductById(id);
+          if (response) setProduct(response);
+          else console.error("Did not fecth product");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <div className="h-screen bg-secondary">
