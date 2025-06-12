@@ -1,4 +1,4 @@
-import {  Product } from "@/types/productType";
+import { Product } from "@/types/productType";
 import { METHODS } from "http";
 
 export async function getAllProducts(): Promise<Product[] | null> {
@@ -111,8 +111,8 @@ export async function updateProduct(
 
   try {
     const response = await fetch(
-      `https://localhost:8080/api/product/update/${prodId}`,
-      { method: "POST", body: formData }
+      `http://localhost:8080/api/product/update/${prodId}`,
+      { method: "PUT", body: formData }
     );
 
     if (!response.ok) {
