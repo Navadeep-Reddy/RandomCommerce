@@ -33,15 +33,22 @@ function Home(): JSX.Element {
         {products?.map((product: Product): any => (
           <Link to={`/product/${product.id}`} key={product.id}>
             <div
-              className="bg-tertiary p-7 rounded-xl hover:bg-accent duration-100"
+              className="bg-tertiary p-7 rounded-xl hover:bg-accent duration-100 flex justify-between"
               key={product.id}
             >
-              <p className="id text-2xl">Product Name : {product.name}</p>
-              <p>Price : {product.price}</p>
-              <p className="Avail">
-                Availability :{" "}
-                {product.availability ? product.quantity : "Out of Stock"}
-              </p>
+              <div>
+                <p className="id text-2xl">Product Name : {product.name}</p>
+                <p>Price : {product.price}</p>
+                <p className="Avail">
+                  Availability :{" "}
+                  {product.availability ? product.quantity : "Out of Stock"}
+                </p>
+              </div>
+              {/*We manually make the url form the data instead of converting into a blob and then getting url for it */}
+              <img
+                className="h-28 w-28 object-cover"
+                src={`data:${product.imageType};base64,${product.imageData}`}
+              ></img>
             </div>
           </Link>
         ))}

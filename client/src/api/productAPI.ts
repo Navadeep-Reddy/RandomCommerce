@@ -1,5 +1,4 @@
 import { Product } from "@/types/productType";
-import { METHODS } from "http";
 
 export async function getAllProducts(): Promise<Product[] | null> {
   try {
@@ -84,12 +83,14 @@ export async function getImage(prodId: number): Promise<string | null> {
       throw new Error("Error in Fetching byte array");
     }
 
+    //creating a blob object from the received byte array
     const imageObject: Blob = await response.blob();
 
     if (imageObject == null) {
       throw new Error("Error in parsing data to Blob");
     }
 
+    //makes a URL to the object created from the blob
     const url = URL.createObjectURL(imageObject);
     return url;
   } catch {
@@ -131,4 +132,25 @@ export async function deleteProduct(prodId: number): Promise<void> {
   await fetch(`http://localhost:8080/api/product/delete/${prodId}`, {
     method: "DELETE",
   });
+}
+
+export async function searchProductByKeyword(
+  keyword: string
+): Promise<Product[]> {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/product/search?keyword=${keyword}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed in getting searched items");
+    }
+
+    const data: Product[] = await response.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+  return [];
 }

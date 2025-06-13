@@ -69,7 +69,7 @@ export default function Description(): JSX.Element {
             </div>
             <div className="flex gap-x-6 mt-10">
               <Link to={`/update/${product.id}`}>
-                <button className="border bg-primary px-5 py-2 text-white font-semibold border-none rounded-full">
+                <button className="border  bg-primary px-5 py-2 text-white font-semibold border-none rounded-full">
                   Update
                 </button>
               </Link>
