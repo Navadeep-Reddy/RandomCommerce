@@ -83,7 +83,7 @@ export default function Description(): JSX.Element {
           </div>
           <div className="image">
             {image ? (
-              <img src={image} className="h-[500px] w-[500px]"></img>
+              <img src={image} className="h-[500px] w-[700px] object-cover"></img>
             ) : (
               <div>Loading Image</div>
             )}

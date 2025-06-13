@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Product } from "@/types/productType";
 import { uploadProducts } from "@/api/productAPI";
+import { useNavigate } from "react-router-dom";
 
 export default function AddPage() {
   const [image, setImage] = useState<File | null>(null);
+  const navigate = useNavigate();
   const [product, setProduct] = useState<Product>({
     id: 0,
     price: 0,
@@ -19,6 +21,7 @@ export default function AddPage() {
     if (image && product) {
       const response = await uploadProducts(product, image);
       console.log(response);
+      navigate("/");
     } else {
       console.log("Required data is not filled");
     }

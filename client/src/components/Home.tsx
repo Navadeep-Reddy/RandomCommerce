@@ -43,6 +43,7 @@ function Home(): JSX.Element {
                   Availability :{" "}
                   {product.availability ? product.quantity : "Out of Stock"}
                 </p>
+                <p>Description : {product.description}</p>
               </div>
               {/*We manually make the url form the data instead of converting into a blob and then getting url for it */}
               <img

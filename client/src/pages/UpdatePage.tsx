@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Product } from "@/types/productType";
 import { getImage, getProductById, updateProduct } from "@/api/productAPI";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpdatePage() {
   const [image, setImage] = useState<File | null>(null);
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<Product>({
     id: 0,
     price: 0,
@@ -21,6 +22,7 @@ export default function UpdatePage() {
     if (image && product && id) {
       const response = await updateProduct(parseInt(id), product, image);
       console.log(response);
+      navigate("/");
     } else {
       console.log("Required data is not filled");
     }
