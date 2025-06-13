@@ -87,6 +87,19 @@ public class ProductController {
         }
     }
 
+    @GetMapping("product/search")
+    public ResponseEntity<List<Product>> searchProduct(@RequestParam String keyword){
+        List<Product> result = productService.searchByKeyword(keyword);
+
+        if (result != null){
+            return ResponseEntity.ok().body(result);
+        }
+
+        else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 
 }
