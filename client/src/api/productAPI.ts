@@ -126,3 +126,9 @@ export async function updateProduct(
     return null;
   }
 }
+
+export async function deleteProduct(prodId: number): Promise<void> {
+  await fetch(`http://localhost:8080/api/product/delete/${prodId}`, {
+    method: "DELETE",
+  });
+}

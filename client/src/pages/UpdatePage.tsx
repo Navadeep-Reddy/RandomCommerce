@@ -44,7 +44,7 @@ export default function UpdatePage() {
   return (
     <div className="h-screen bg-secondary">
       <div className="w-[80%] mx-auto items-center pt-[8%] h-full flex flex-col">
-        <h1 className="text-6xl font-bold">Add Product</h1>
+        <h1 className="text-6xl font-bold">Update Product</h1>
         <form
           className="details box mt-10 grid grid-cols-3 gap-x-4 gap-y-6 p-4 rounded-lg"
           onSubmit={(e) => e.preventDefault()}

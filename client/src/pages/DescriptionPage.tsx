@@ -1,12 +1,23 @@
 import { JSX, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getImage, getProductById } from "@/api/productAPI";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { deleteProduct, getImage, getProductById } from "@/api/productAPI";
 import { Product } from "@/types/productType";
 
 export default function Description(): JSX.Element {
   const [product, setProduct] = useState<Product | null>(null);
   const [image, setImage] = useState<string | null>(null);
   const { id } = useParams();
+  const navigate = useNavigate();
+  const handleClick = async () => {
+    try {
+      if (id) {
+        await deleteProduct(parseInt(id));
+        navigate("/");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +73,10 @@ export default function Description(): JSX.Element {
                   Update
                 </button>
               </Link>
-              <button className="border bg-primary px-5 py-2 text-white font-semibold border-none rounded-full">
+              <button
+                className="border bg-primary px-5 py-2 text-white font-semibold border-none rounded-full"
+                onClick={() => handleClick()}
+              >
                 Delete
               </button>
             </div>
